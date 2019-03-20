@@ -7,6 +7,8 @@
 
 Fecha.meses = new Array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 Fecha.meses_cortos = new Array("","Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic");
+Fecha.dias_semanas = new Array("","Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado");
+Fecha.dias_semanas_corto = new Array("","Do","Lu","Ma","Mi","Ju","Vi","Sa");
 function Fecha(stringfecha,separador = "-"){
     var _this = this;
     var fecha = stringfecha || new Date();
@@ -60,7 +62,7 @@ function Fecha(stringfecha,separador = "-"){
     };
     
     this.getNumeroDiaSemana = function(){
-        return fecha.getDay();
+        return fecha.getDay()+1;
     };
     
     this.getFechaNombre = function(){
@@ -69,5 +71,22 @@ function Fecha(stringfecha,separador = "-"){
     
     this.getFechaNombreCorto = function(){
         return _this.getDia(true)+separador+Fecha.meses_cortos[_this.getMes()]+separador+_this.getAnio();
+    };
+    
+    this.getPrimerDiaMes = function(Mes = undefined){
+        return new Fecha(_this.getAnio()+separador+completarCeros(Mes || _this.getMes())+separador+"01");
+    };
+    
+    this.getUltimoDiaMes = function(Mes = undefined){
+        return new Fecha(new Date(fecha.getFullYear(), (Mes || (fecha.getMonth() + 1)), 0));
+    };
+    
+    this.getDiaSiguiente = function(){
+        var dia = new Date(fecha.getTime() + 24*60*60*1000);
+        return new Fecha(dia);
+    };
+    this.getDiaAnterior = function(){
+        var dia = new Date(fecha.getTime() - 24*60*60*1000);
+        return new Fecha(dia);
     };
 }
