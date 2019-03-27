@@ -12,10 +12,14 @@ and open the template in the editor.
     </head>
     <body>
         <input id="iCalendario" />
+        <input id="iFechaInicial" />
+        <input id="iFechaFinal" />
     </body>
     <script type="text/javascript" src="Calendario/Fecha.js"></script>
     <script type="text/javascript" src="Calendario/Calendario.js"></script>
     <script>
         new Calendario("iCalendario");
+
+        console.log(new Fecha().getPrimerDiaDeLaSemana().toString());
     </script>
 </html>
