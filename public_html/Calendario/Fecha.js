@@ -35,7 +35,18 @@ function Fecha(stringfecha,separador = "-"){
         return completarCeros(fecha.getDate())+separador+completarCeros(fecha.getMonth()+1)+separador+fecha.getFullYear();
     }
     
+    function addDay(numero_dias){
+        console.log(numero_dias);
+        return new Date(fecha.setDate(fecha.getDate()+numero_dias));
+    }
     
+    this.getUltimoDiaDeLaSemana = function(){
+        return new Fecha(addDay((7-(fecha.getDay()+1))));
+    };
+    this.getPrimerDiaDeLaSemana = function(){
+        return new Fecha(addDay((-1*fecha.getDay())));
+    };
+
     this.toString = function(){
         return getFechaMX(fecha);
     };
